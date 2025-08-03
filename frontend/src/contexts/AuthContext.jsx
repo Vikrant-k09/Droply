@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
       const token = Cookies.get('token');
       const savedUser = Cookies.get('user');
       
-      if (token && savedUser) {
+      if (token && savedUser && savedUser !== 'undefined') {
         try {
           setUser(JSON.parse(savedUser));
           // Optionally refresh user data from server
@@ -78,8 +78,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const updateUser = (userData) => {
-    setUser(userData);
-    Cookies.set('user', JSON.stringify(userData), { expires: 30 });
+    const newUserData = typeof userData === 'function' ? userData(user) : userData;
+    setUser(newUserData);
+    if (newUserData) {
+      Cookies.set('user', JSON.stringify(newUserData), { expires: 30 });
+    }
   };
 
   const value = {

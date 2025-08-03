@@ -50,7 +50,7 @@ export default function RegisterForm() {
     } else {
       const passwordValidation = validatePassword(formData.password);
       if (!passwordValidation.isValid) {
-        newErrors.password = 'Password must be at least 6 characters with uppercase, lowercase, and number';
+        newErrors.password = passwordValidation.message;
       }
     }
 

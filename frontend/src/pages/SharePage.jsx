@@ -17,13 +17,19 @@ export default function SharePage() {
   const [downloading, setDownloading] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
 
-  // Get custom message from URL query parameter
+  // Get custom message from URL query parameter and clean URL
   const searchParams = new URLSearchParams(window.location.search);
   const customMessage = searchParams.get('message');
 
   useEffect(() => {
     fetchFile();
-  }, [shareLink]);
+    
+    // Clean the URL if there's a message parameter to hide it from address bar
+    if (customMessage) {
+      const cleanUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}`;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
+  }, [shareLink, customMessage]);
 
   const fetchFile = async () => {
     try {

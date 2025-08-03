@@ -232,11 +232,7 @@ export const getFileByShareLink = async (req, res) => {
       }
     }
 
-    // Check if file is public or user is owner
-    if (!file.isPublic && (!req.user || req.user._id.toString() !== file.owner._id.toString())) {
-      return res.status(403).json({ message: 'Access denied' });
-    }
-
+    // Files with share links are accessible since they have a valid share link
     res.json({
       file: {
         id: file._id,

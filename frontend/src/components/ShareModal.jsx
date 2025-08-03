@@ -9,10 +9,11 @@ import { X, Copy, QrCode, Download, Share2 } from 'lucide-react';
 
 export default function ShareModal({ file, onClose }) {
   const [customMessage, setCustomMessage] = useState('');
-  const baseShareLink = `${window.location.origin}/share/${file.shareLink}`;
-  const shareLink = customMessage 
-    ? `${baseShareLink}?message=${encodeURIComponent(customMessage)}`
-    : baseShareLink;
+  const shareLink = `${window.location.origin}/share/${file.shareLink}`;
+  // For internal use when we need to pass the message (like for the first visit)
+  const shareLinkWithMessage = customMessage 
+    ? `${shareLink}?message=${encodeURIComponent(customMessage)}`
+    : shareLink;
   const qrRef = useRef();
 
   const handleCopyLink = async () => {
