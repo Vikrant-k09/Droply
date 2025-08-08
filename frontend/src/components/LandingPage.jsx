@@ -68,7 +68,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-gray-800 py-8 mt-20">
         <div className="max-w-4xl mx-auto px-6 text-center text-gray-500">
-          <p>&copy; 2024 Droply. Simple file sharing.</p>
+          <p>&copy; 2025 Droply. Simple file sharing.</p>
         </div>
       </footer>
     </div>
